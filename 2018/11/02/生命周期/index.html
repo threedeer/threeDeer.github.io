@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="��ȥ��Ҳ�޷���Ҳ����">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        生命周期 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/">
+        </div>
+        <div class="name">
+            <i>âЬʤ��</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#生命周期示意图"><span class="toc-text">生命周期示意图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法介绍"><span class="toc-text">方法介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#onCreate-）"><span class="toc-text">onCreate(）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#onStart"><span class="toc-text">onStart()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#onRestart"><span class="toc-text">onRestart()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#onResume"><span class="toc-text">onResume()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#onPause"><span class="toc-text">onPause()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#onStop"><span class="toc-text">onStop()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#onDestory"><span class="toc-text">onDestory()</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#注意点"><span class="toc-text">注意点</span></a></li>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        生命周期
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-11-02 22:40:03</span></span>
+        
+        
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h2 id="生命周期示意图"><a href="#生命周期示意图" class="headerlink" title="生命周期示意图"></a>生命周期示意图</h2><p><img src="https://user-gold-cdn.xitu.io/2018/10/30/166c57fe0b3193bb?w=545&amp;h=711&amp;f=png&amp;s=62770" alt="生命周期示意图
+"></p>
+<h2 id="方法介绍"><a href="#方法介绍" class="headerlink" title="方法介绍"></a>方法介绍</h2><h4 id="onCreate-）"><a href="#onCreate-）" class="headerlink" title="onCreate(）"></a>onCreate(）</h4><p>  此方法表示Activity正在被创建，此时可以做加载界面布局资源、初始化数据等操作。</p>
+<h4 id="onStart"><a href="#onStart" class="headerlink" title="onStart()"></a>onStart()</h4><p>   此方法表示Activity正在启动，此时Activity已经是可见，但是还不能与用户交互。</p>
+<h4 id="onRestart"><a href="#onRestart" class="headerlink" title="onRestart()"></a>onRestart()</h4><p>   此方法表示Activity重新启动，一般是从不可见变为可见时调用。</p>
+<h4 id="onResume"><a href="#onResume" class="headerlink" title="onResume()"></a>onResume()</h4><p>  此方法表示Activity显示出来，已经是可见状态，并在前台活动，能与用户交互。</p>
+<h4 id="onPause"><a href="#onPause" class="headerlink" title="onPause()"></a>onPause()</h4><p> 此方法表示Activity正在停止，与onResume相对应，此时可以做一些数据存储，停止动画等工作，但是不建议做耗时操作。</p>
+<h4 id="onStop"><a href="#onStop" class="headerlink" title="onStop()"></a>onStop()</h4><p>此方法表示Activity即将停止，与onStart相对应，此时可以做一些稍重量级的任务，依然不能做耗时操作。</p>
+<h4 id="onDestory"><a href="#onDestory" class="headerlink" title="onDestory()"></a>onDestory()</h4><p>此方法表示Activity将被销毁，此时可以做一些资源的释放工作。</p>
+<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><ul>
+<li>A_Activity启动B_Activity（完全透明）或者一个Dialog时，生命周期是：<br>A的onPause() –&gt;B的onCreate()–&gt;onStart()–&gt;onResume()；<br>此时是不会调用A的onStop()方法的。</li>
+</ul>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
