@@ -214,7 +214,47 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                
+                <h1 id="启动模式"><a href="#启动模式" class="headerlink" title="启动模式"></a>启动模式</h1><h2 id="标准模式-Standard"><a href="#标准模式-Standard" class="headerlink" title="标准模式 Standard"></a>标准模式 Standard</h2><p>###定义<br>系统默认模式，每次启动一个Activity都会重新创建一个新的实例，不管实例是否已经存在。</p>
+<p>###过程<br>生命周期中的onCreate(),onStart(),onResume()方法会被调用。</p>
+<p>###注意<br>当使用ApplicationContext去启动standard模式启动Activity的时候会报错。因为此模式的Activity默认会进入启动它的Activity所属的任务栈，但是非Activity类型的Context并没有所谓的任务栈。<br>解决办法：为待启动Activity指定FLAG_ACTIVITY_NEW_TASK 标记位。实际上这个时候已经是SingTask的启动模式了。</p>
+<h2 id="栈顶复用模式-SingleTop"><a href="#栈顶复用模式-SingleTop" class="headerlink" title="栈顶复用模式 SingleTop"></a>栈顶复用模式 SingleTop</h2><p>###定义<br>在新Activity已经位于任务栈的栈顶，那么此Activity不会被创建，onNewIntent方法会被回调。如果任务栈内有当前Activity，但是不是位于栈顶，那么新的Activity依然会被创建，此时过程跟Standard模式一样。</p>
+<p>###过程  </p>
+<ul>
+<li>Activity已存在，不会创建新的Activity，并回调onNewIntent方法。调用onResume()。</li>
+<li>Activitu不存在，与Standard模式一样。</li>
+</ul>
+<p>##栈内复用模式 SingleTask</p>
+<p>###定义<br>只要Activity存在栈内，那么多次启动Activity都不会创建新的实例。</p>
+<p>###过程</p>
+<ul>
+<li>任务栈、Activity实例都已存在 – 移除任务栈内需要创建的Activity的上层的Activity，并回调onNewIntent方法。调用onResume()。</li>
+<li>任务栈已存在，Activity不存在 – 新建Activity，并压栈。</li>
+<li>任务栈与Activity都不存在 – 新创建任务栈，再新建Activity实例。</li>
+</ul>
+<p>##单实例模式 SingleInstance</p>
+<p>###定义<br>全局单例模式，此模式的Activity只能单独位于一个任务栈中。</p>
+<p>###过程<br>当创建此模式的Activity时，系统会为其创建一个新的任务栈，并且此任务栈只有当前Activity，当后续启动均不会创建新的Activity，除非此Activity的实例被系统销毁。</p>
+<p>##指定启动模式的方法</p>
+<ol>
+<li><p>通过AndroidManiFest指定  </p>
+<pre><code>&lt;activity  
+    android:name=&quot;com.test.OneActivity&quot;  
+       android:configChanges=&quot;screenSize|keyboardHidden|orientation&quot;  
+    android:launchMode=&quot;singleTop&quot;  
+        android:screenOrientation=&quot;portrait&quot;/&gt;
+</code></pre></li>
+<li><p>通过Intent设置标志位  </p>
+<pre><code>Intent intent = new Intent(MainActivity.this,SecondActivity.class);
+intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+startActivity(intent);
+</code></pre></li>
+</ol>
+<p>###二者区别  </p>
+<ul>
+<li>优先级  第二种高于第一种</li>
+<li>第一种无法设置FLAG_ACTIVITY_CLEAR_TOP标识；第二种无法指定SingleInstance模式。</li>
+</ul>
+
 
                 
             </div>
