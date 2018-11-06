@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="归去，也无风雨也无晴">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="芒鞋胜马">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="IntentFilter的匹配规则">
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="归去，也无风雨也无晴">
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="芒鞋胜马">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="https://threedeer.github.io/img/contact-bg.jpg">
+    
+
+        <meta name="twitter:card" content="summary_large_image">
+
+    
+
+    
+        <meta name="twitter:image" content="https://threedeer.github.io/img/contact-bg.jpg">
+    
+
+    <!-- Title -->
+    
+    <title>IntentFilter的匹配规则 - 芒鞋胜马</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+    <link rel="icon" href="/img/favicon.jpg">
+    
+
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">芒鞋胜马</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                首页
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                归档
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                标签
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                分类
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/threedeer">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>IntentFilter的匹配规则</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2018-11-06
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/Activity/">#Activity</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h2 id="Activity的启动方式"><a href="#Activity的启动方式" class="headerlink" title="Activity的启动方式"></a>Activity的启动方式</h2><h3 id="显示调用"><a href="#显示调用" class="headerlink" title="显示调用"></a>显示调用</h3><p>显示调用使用场景基本是应用内部跳转，频率较高;常用方式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Intent inten = <span class="keyword">new</span> Intent(A.<span class="keyword">this</span>,B.class);</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure></p>
+<p>显示调用启动同一应用程序时占优！效率会高很多！</p>
+<h3 id="隐式调用"><a href="#隐式调用" class="headerlink" title="隐式调用"></a>隐式调用</h3><p>在启动的时候是不明确的，需要匹配系统或者AndroidManifest.xml中的intent-filter定义，只有action、category和data完全匹配时才会启动；常见的方式：<br>  AndroidManifest.xml中定义某个Activity的intent-fliter<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"com.example.activity.ACTION_START"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.DEFAULT"</span> /&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"com.example.activity.ACTION_START"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p> Activity中<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//android.intent.category.DEFAULT是一种默认的category,在startActivity时自动添加</span></span><br><span class="line">Intent intent = <span class="keyword">new</span> Intent(<span class="string">"com.example.activity.ACTION_START"</span>);</span><br><span class="line">intent.addCategory(<span class="string">"com.example.activity.ACTION_START"</span>); </span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure></p>
+<p>隐式调用启动需要过滤，耗时较多，可以用于查找与之匹配的应用，用来不同应用之间的跳转。</p>
+<h2 id="匹配规则"><a href="#匹配规则" class="headerlink" title="匹配规则"></a>匹配规则</h2><p>匹配intent-filter，需要同时匹配过滤列表中的action、category、data信息，否则失败。<br>一个intent-filter钟action、category、data可以有多个，所有的action、category、data分别构成不同类别，统一类别的信息共同约束当前类别的匹配过程，只有一个Intent同时匹配action、category、data才算匹配成功。<br>一个Activity中可以有多个intent-filter，一个Intent只要能匹配任何一组intent-filter即可启动对应的Activity。</p>
+<h3 id="action匹配规则"><a href="#action匹配规则" class="headerlink" title="action匹配规则"></a>action匹配规则</h3><p>action是一个字符串，系统定义了一些action，也可以自定义。</p>
+<h4 id="规则"><a href="#规则" class="headerlink" title="规则:"></a>规则:</h4><p>Intent中的action必须能够和过来规则中的action匹配，即字符串完全一样。讴歌过滤规则中可以有多个action，那么只要Intent中的action能够和过滤规则中的任何一个action相同，即匹配成功。</p>
+<h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><p>如果Intent中没有指定action，那么匹配失败。</p>
+<h3 id="category匹配规则"><a href="#category匹配规则" class="headerlink" title="category匹配规则"></a>category匹配规则</h3><p>category是一个字符串，系统定义了一些category，也可以自定义。</p>
+<h4 id="规则："><a href="#规则：" class="headerlink" title="规则："></a>规则：</h4><p>如果Intent中有category，那么所有的category都必须在过滤规则中定义过。</p>
+<h4 id="注意：-1"><a href="#注意：-1" class="headerlink" title="注意："></a>注意：</h4><p>Intent可以没有指定category，因为android.intent.category.DEFAULT是一种默认的category,在startActivity时自动添加。</p>
+<h3 id="data匹配规则"><a href="#data匹配规则" class="headerlink" title="data匹配规则"></a>data匹配规则</h3><h4 id="data结构："><a href="#data结构：" class="headerlink" title="data结构："></a>data结构：</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">data</span> <span class="attr">android:scheme</span>=<span class="string">"string"</span> //<span class="attr">URI</span>模式，比如<span class="attr">http</span>，<span class="attr">file</span>等,如果没有指定，那么<span class="attr">URI</span>无效</span></span><br><span class="line"><span class="tag">	  <span class="attr">android:host</span>=<span class="string">"string"</span> //<span class="attr">URI</span>主机名，如果未指定，<span class="attr">URI</span>无效</span></span><br><span class="line"><span class="tag">	  <span class="attr">android:port</span>=<span class="string">"string"</span> //端口号</span></span><br><span class="line"><span class="tag">	  <span class="attr">android:path</span>=<span class="string">"string"</span> //路径信息</span></span><br><span class="line"><span class="tag">	  <span class="attr">android:pathPattern</span>=<span class="string">"string"</span>//路径信息</span></span><br><span class="line"><span class="tag">	  <span class="attr">android:pathPrefix</span>=<span class="string">"string"</span>//路径信息</span></span><br><span class="line"><span class="tag">	  <span class="attr">android:mimeType</span>=<span class="string">"string"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>data由mimeType和URI两部分组成，mimeType指媒体类型，URI是指路径。</p>
+<h4 id="规则：-1"><a href="#规则：-1" class="headerlink" title="规则："></a>规则：</h4><ol>
+<li>当指定了媒体类型为所以类型的图片，那么Intent中的mimeType属性必须为”image/*”才能匹配，这种情况下虽然过滤规则没有指定URI，但是却有默认值。</li>
+<li>当指定了两组data规则，且每组都指定了完整属性值，既有URI，又有mimeType。匹配方式只要满足其中一种即可。</li>
+</ol>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>如果要为Intent指定完整的data，必须先调用setDataAndType方法，不能先调用setData再调用setType，因为这两个方法会清除对方的值。源码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Intent <span class="title">setData</span><span class="params">(Uri data)</span></span>&#123;</span><br><span class="line">	mData = data;</span><br><span class="line">	mType = <span class="keyword">null</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/threedeer" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2018 芒鞋胜马<br></p>
+             <!--    <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p> -->
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
