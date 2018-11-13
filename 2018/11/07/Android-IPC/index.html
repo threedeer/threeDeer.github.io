@@ -217,7 +217,229 @@
                 <h2 id="IPC含义"><a href="#IPC含义" class="headerlink" title="IPC含义"></a>IPC含义</h2><p>IPC全称：Inter-Progress Communication<br>是指进程间通信或者跨进程通信，也就是说两个进程间的进行数据交换的过程。</p>
 <p>##Android中的IPC方式</p>
 <p><img src="https://i.imgur.com/U0qn9Z0.png" alt="常见IPC方式关系图"></p>
-<h3 id="Bundle"><a href="#Bundle" class="headerlink" title="Bundle"></a>Bundle</h3>
+<h3 id="Binder"><a href="#Binder" class="headerlink" title="Binder"></a>Binder</h3><h4 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h4><p>Binder，在网上有各种各样的解释，Binder的具体含义主要是在什么环境下代表什么意思：</p>
+<ul>
+<li>从API角度：是一个类，实现IBinder接口</li>
+<li>从IPC角度：是Android中的一种跨进程通信方式</li>
+<li>从Framework角度：是ServiceManager链接各种Manager和相应ManagerService的桥梁</li>
+<li>从应用层：是客户端与服务端进行通信的媒介</li>
+</ul>
+<p>之所以选择Binder方式在Android中做为跨进程通信的方式，主要是因为Android自身的进程空间划分，Android进程空间主要分为用户空间和内核空间，用户空间数据不可共享，内核空间数据可共享，所有进程共用一个内核空间。而传统的进程间通信方式需要两次复制，Binder只需要复制一次，这是Binder通信方式的最大优势，同时还具有可操作性强 （操作简单），实现C/S架构方便，安全性高等优点。</p>
+<h4 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h4><p>上面说到Binder实现C/S架构，那来看看是怎么实现的</p>
+<h5 id="示意图"><a href="#示意图" class="headerlink" title="示意图"></a>示意图</h5><ul>
+<li>Client进程：使用服务的进程 —— Android客户端</li>
+<li>Server进程：提供服务的进程 —— 服务端</li>
+<li>ServiceManger：管理Service注册于查询 —— 类似路由功能</li>
+<li>Binder驱动：<ol>
+<li>一种虚拟设备驱动，连接Server进程、Client进程和ServiceManger的桥梁；</li>
+<li>传递服务进程消息；</li>
+<li>通过内存映射传递进程间需要传递是数据；</li>
+<li>通过Binder线程池，实现线程控制，并由Binder驱动自身进行管理<br>—— Binder驱动持有每个Server进程的在内核空间中的Binder实体，并给Client进程提供Binder实体的引用，类似字典目录。</li>
+</ol>
+</li>
+</ul>
+<h5 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h5><p>参照上面的示意图<br><img src="https://i.imgur.com/8rnpj3F.png" alt=""></p>
+<ol>
+<li>服务端调用Binder驱动，然后通过系统调用ServiceManger中注册服务，①③；</li>
+<li>注册成功，并且ServiceManger持有当前服务的Binder实体的引用，③⑥；</li>
+<li>客户端调用Binder驱动，然后通过系统调用ServiceManger中通过名字去查找对应的服务，②③；</li>
+<li>ServiceManger通过系统调用Binder驱动，给客户端返回所持有的Server端的Binder实体的引用，③⑤；</li>
+<li>通过上述对Binder驱动的多次调用，实现了Client —— ServiceManager —— Server 的架构实现，即⑦⑧⑨。</li>
+</ol>
+<h4 id="在Android中的具体代码实现"><a href="#在Android中的具体代码实现" class="headerlink" title="在Android中的具体代码实现"></a>在Android中的具体代码实现</h4><p>在源码中，Binder是一个类，实现了IBinder接口；这里通过AIDL来实现;这里我们实现一个每隔5s就向服务端新增一本书，然后再在客户端打印出来。</p>
+<h5 id="第一步：新建后缀名是aidl的文件以及相关类"><a href="#第一步：新建后缀名是aidl的文件以及相关类" class="headerlink" title="第一步：新建后缀名是aidl的文件以及相关类"></a>第一步：新建后缀名是aidl的文件以及相关类</h5><p>新建三个文件，Book.java、Book.aidl、IBookManager.aidl；<br>Book.java 实现了Parcelable接口</p>
+<pre><code>public class Book  implements Parcelable{
+private String bookName;
+private int bookId;
+
+
+public Book(int bookId,String bookName) {
+    this.bookName = bookName;
+    this.bookId = bookId;
+}
+//get、set相关code···
+
+@Override
+public String toString() {
+    return &quot;bookName : &quot; + bookName +
+            &quot;bookId&quot; + bookId;
+}
+}
+</code></pre><p>Book.aidl 是Book类在AIDL中的声明</p>
+<pre><code>package com.demo.t.aidltest;
+
+// Declare any non-default types here with import statements
+parcelable Book;
+</code></pre><p>IBookManager.aidl 是定义的一个接口，里面的两个方法：getBookList用于从远程服务端获取图书列表，addBook用于往图书列表中添加一本书</p>
+<pre><code>package com.demo.t.aidltest;
+
+// Declare any non-default types here with import statements
+import com.demo.t.aidltest.Book;
+import com.demo.t.aidltest.IOnNewBookListener;
+
+interface IBookManager {
+
+
+List&lt;Book&gt; getBookList();
+
+void addBook(in Book book);
+
+void registerListener(IOnNewBookListener listener);
+void unRegisterListener(IOnNewBookListener listener);
+}
+</code></pre><p>之后系统会在gen目录下自动生成IBookManager.java类，这个类中就有Binder；</p>
+<h5 id="第二步：远程服务端Service实现"><a href="#第二步：远程服务端Service实现" class="headerlink" title="第二步：远程服务端Service实现"></a>第二步：远程服务端Service实现</h5><p>先创建一个Service BookManagerService</p>
+<pre><code>public class BookManagerService extends Service {
+private static final String TAG = &quot;BookManagerService&quot;;
+private AtomicBoolean mIsServiceDestoryed = new AtomicBoolean(false);
+private RemoteCallbackList&lt;IOnNewBookListener&gt; mListeners = new RemoteCallbackList&lt;&gt;();
+
+/**
+ * 支持并发读写  自动的线程同步
+ */
+private CopyOnWriteArrayList&lt;Book&gt; mBookList = new CopyOnWriteArrayList&lt;&gt;();
+
+private Binder mBinder = new IBookManager.Stub() {
+    @Override
+    public List&lt;Book&gt; getBookList() throws RemoteException {
+        return mBookList;
+    }
+
+    @Override
+    public void addBook(Book book) throws RemoteException {
+        mBookList.add(book);
+    }
+
+    @Override
+    public void registerListener(IOnNewBookListener listener) throws RemoteException {
+        mListeners.register(listener);
+    }
+
+    @Override
+    public void unRegisterListener(IOnNewBookListener listener) throws RemoteException {
+        mListeners.unregister(listener);
+        Log.i(TAG, &quot;unRegisterListener: SUCCESS&quot; );
+    }
+
+    @Override
+    public void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat, double aDouble, String aString) throws RemoteException {
+
+    }
+};
+
+@Override
+public void onCreate() {
+    super.onCreate();
+    mBookList.add(new Book(1, &quot;安卓开发艺术探索&quot;));
+    mBookList.add(new Book(2, &quot;安卓源码设计模式解析与实践&quot;));
+    /**
+     * 每隔5s加一本书 并通知下去
+     */
+
+    new Thread(new ServiceWorker()).start();
+}
+
+@Override
+public void onDestroy() {
+    mIsServiceDestoryed.set(true);
+    super.onDestroy();
+}
+
+private void onNewBookArrived(Book book) throws RemoteException {
+    mBookList.add(book);
+
+    final int N = mListeners.beginBroadcast();
+    Log.i(TAG, &quot;onNewBookArrived: size&quot; + N);
+
+    for (int i = 0; i &lt; N; i++) {
+//   mListeners.getBroadcastItem(i).onNewBookArrived(book);
+
+        IOnNewBookListener listener = mListeners.getBroadcastItem(i);
+        if (listener != null) {
+            listener.onNewBookArrived(book);
+        }
+    }
+    mListeners.finishBroadcast();
+}
+
+
+private class ServiceWorker implements Runnable {
+
+    @Override
+    public void run() {
+        while (!mIsServiceDestoryed.get()){
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        int bookId = mBookList.size() + 1;
+        Book newBook = new Book(bookId, &quot;new Book # &quot; + bookId);
+        try {
+            onNewBookArrived(newBook);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+    }
+    }
+}
+
+@Nullable
+@Override
+public IBinder onBind(Intent intent) {
+    return mBinder;
+}}
+</code></pre><p>并在AndroidManifest中创建进程</p>
+<pre><code>&lt;service
+       android:name=&quot;.BookManagerService&quot;
+       android:enabled=&quot;true&quot;
+       android:exported=&quot;true&quot;
+       android:process=&quot;:book&quot; /&gt;
+</code></pre><h5 id="第三步：客户端实现"><a href="#第三步：客户端实现" class="headerlink" title="第三步：客户端实现"></a>第三步：客户端实现</h5><p>客户端实现主要是绑定远程服务，然后将服务端返回的Binder对象转换成AIDL接口，然后就可以通过这个接口去调用服务端的远程方法</p>
+<pre><code>//onCreate中绑定服务
+   Intent intentA = new Intent();
+   intentA.setClass(this, BookManagerService.class);
+   bindService(intentA, aidlConnection, Service.BIND_AUTO_CREATE);
+
+//AIDL方式
+private ServiceConnection aidlConnection = new ServiceConnection() {
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service) {
+        mIBookManager = IBookManager.Stub.asInterface(service);
+        try {
+            List&lt;Book&gt; bookList = mIBookManager.getBookList();
+            Log.i(TAG, &quot;onServiceConnected: bookManager&quot; + bookList.getClass().getCanonicalName());
+            Log.i(TAG, &quot;onServiceConnected: bookManager&quot; + bookList.toString());
+            mIBookManager.addBook(new Book(3, &quot;第一行代码&quot;));
+            List&lt;Book&gt; newList = mIBookManager.getBookList();
+            Log.i(TAG, &quot;onServiceConnected: bookManager&quot; + newList.toString());
+            mIBookManager.registerListener(mIOnNewBookListener);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+
+    }
+};
+</code></pre><p>最后不要忘了在onDestroy中解绑，绑定成功之后会通过bookManager去调用getBookList方法，才能回去图书信息；</p>
+<h3 id="过程分析"><a href="#过程分析" class="headerlink" title="过程分析"></a>过程分析</h3><h4 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h4><p>服务端首先创建一个service用来监听客户端的链接请求，然后创建一个AIDL文件，并将要暴露给客户端的接口在这个AIDL文件中声明，最后在service中实现这个AIDL；</p>
+<h4 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h4><p>客户端首先需要绑定服务端的service，绑定成功之后，将服务端返回的Binder对象转换成AIDL接口所属的类型，这样就能直接调用AIDL中的方法；<br>代码中 mIBookManager 就能直接调用 getBookList，addBook方法；</p>
+<h4 id="AIDL接口的创建"><a href="#AIDL接口的创建" class="headerlink" title="AIDL接口的创建"></a>AIDL接口的创建</h4><p>在创建AIDL接口的时候，我们创建了后缀名为aidl的文件，并声明了IBookManager接口 和addBook和 getBookList 这两个接口方法；<br>在AIDL中只有部分数据类型可用：</p>
+<ul>
+<li>基本数据类型</li>
+<li>String和CharSequence</li>
+<li>List：ArrayList，并且里面的每个元素都能够被AIDL支持</li>
+<li>Map：HashMap,键值对每个元素都必须能被AIDL支持</li>
+<li>Parcelable：实现了Parcelable接口对象</li>
+<li>AIDL<br>除了基本数据类型，其它类型的参数必须标上方向：in、out或inout，用于表示在跨进程通信中数据的流向；</li>
+</ul>
+<h4 id="远程服务端Service的实现"><a href="#远程服务端Service的实现" class="headerlink" title="远程服务端Service的实现"></a>远程服务端Service的实现</h4><p>上面我们定义了服务端、客户端以及AIDL接口，那么我们看看AIDL接口是怎么实现的：<br>首先创建一个 BookManagerService 并继承Service，在onCreate方法中添加图书信息；<br>然后创建一个Binder对象，继承自IBookManager.Stub并实现它内部的AIDL方法；<br>最后需要在onBinder中返回这个Binder对象；当然，最后不要忘了在AndroidManifest中声明BookManagerService；<br>还有这里用到的是 CopyOnWriteArrayList 而不是List，是因为AIDL的方法运行是在Binder线程池中，当多个客户端访问时需要处理线程同步，而 CopyOnWriteArrayList 能自动线程同步；CopyOnWriteArrayList 并不是继承自ArrayList，但依然能在此处使用；因为AIDL中支持的是抽象List，虽然服务端返回的 CopyOnWriteArrayList ,但是再Binder中依然会按照List的规范访问并完成一个新的ArrayList传递给客户端。</p>
+
 
                 
             </div>
