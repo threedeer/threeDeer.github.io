@@ -216,7 +216,20 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <h2 id="两数之和"><a href="#两数之和" class="headerlink" title="两数之和"></a>两数之和</h2><p>题目：给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。<br>你可以假设每个输入只对应一种答案，且同样的元素不能被重复利用。</p>
 <p>示例：给定 nums = [2, 7, 11, 15], target = 9<br>因为 nums[0] + nums[1] = 2 + 7 = 9<br>所以返回 [0, 1]</p>
-<h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>看到这里，我的第一反应就是双循环遍历数组，这应该是最简单最直接的办法了，于是飞快的敲出来：<br>    public int[] twoSum(int[] nums, int target) {<br>        int[] result = new int[2];<br>        for (int i = 0; i &lt; nums.length; i ++){<br>               for(int j = i+1; j &lt; nums.length; j ++){<br>                if((nums[i] + nums[j]) == target){<br>                    result[0] = i;<br>                    result[1] = j;<br>                }<br>            }<br>        }<br>        return result;<br>    }<br>然后在LeetCode上看了一下执行效率，可以说是很低了：<br><img src="https://i.imgur.com/xWgVFib.png" alt=""></p>
+<h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>看到这里，我的第一反应就是双循环遍历数组，这应该是最简单最直接的办法了，于是飞快的敲出来：</p>
+<pre><code>public int[] twoSum(int[] nums, int target) {
+    int[] result = new int[2];
+    for (int i = 0; i &lt; nums.length; i ++){
+           for(int j = i+1; j &lt; nums.length; j ++){
+            if((nums[i] + nums[j]) == target){
+                result[0] = i;
+                result[1] = j;
+            }
+        } 
+    }
+    return result;
+}
+</code></pre><p>然后在LeetCode上看了一下执行效率，可以说是很低了：<br><img src="https://i.imgur.com/xWgVFib.png" alt=""></p>
 <p>看到这里，第一反应就是觉得是双循环导致效率低下，那能不能单循环实现呢？</p>
 <h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>如果想单循环实现的话，那么在一次循环体里面就需要将两个值都体现出来，那么已知的值有： 当前循环的值，和目标值（也就是和）；那另一个数很自然就出来了   目标值 - 当前值 = 另一个值；另一个值也应该是在数组中，我们只需要将其找出来就行；所以每次循环的时候，将当前值存起来，当遍历到下一个数的时候，做一次减法，看看差值是不是在存储起来的数值里面，所以这里用Map最方便；<br>用HashMap来存储当前数据，添加当前值之前看看之前存储的值有没有差值，如果有就直接返回结果，没有就存进map；具体代码如下:</p>
 <pre><code>public int[] twoSum(int[] nums, int target) {
