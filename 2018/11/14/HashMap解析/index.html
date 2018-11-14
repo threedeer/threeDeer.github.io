@@ -23,7 +23,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="芒鞋胜马">
+        <meta property="og:title" content="HashMap解析">
     
 
     <!--Open Graph Description-->
@@ -36,7 +36,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website">
+        <meta property="og:type" content="article">
     
 
     <!--Page Cover-->
@@ -55,7 +55,7 @@
 
     <!-- Title -->
     
-    <title>归档 - 芒鞋胜马</title>
+    <title>HashMap解析 - 芒鞋胜马</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -159,168 +159,87 @@
 </nav>
 
     <!-- Main Content -->
-    
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
 
-<!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
 <header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>归档</h1>
+                <div class="post-heading">
+                    <h1>HashMap解析</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2018-11-14
+                        
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/java基础/">#java基础</a> <a href="/tags/Map/">#Map</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/Java集合/">Java集合</a>
+
+                    
+                </div>
             
-                <div class="post-preview">
-    <a href="/2018/11/14/HashMap解析/">
-        <h1 class="post-title archive">
-            HashMap解析
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-14
-    </p>
-</div>
+
+            <!-- Gallery -->
             
-                <div class="post-preview">
-    <a href="/2018/11/14/算法之反转整数/">
-        <h1 class="post-title archive">
-            算法之反转整数
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-14
-    </p>
-</div>
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="HashMap解析"><a href="#HashMap解析" class="headerlink" title="HashMap解析"></a>HashMap解析</h1><h2 id="集合体系图-amp-继承关系"><a href="#集合体系图-amp-继承关系" class="headerlink" title="集合体系图 &amp; 继承关系"></a>集合体系图 &amp; 继承关系</h2><p>体系图：<br><img src="https://i.imgur.com/xsFWV3v.png" alt=""></p>
+<p>继承关系：</p>
+<pre><code>java.lang.Object
+   ↳     java.util.AbstractMap&lt;K, V&gt;
+     ↳     java.util.HashMap&lt;K, V&gt;
+
+public class HashMap&lt;K,V&gt;
+  extends AbstractMap&lt;K,V&gt;
+  implements Map&lt;K,V&gt;, Cloneable, Serializable { }
+</code></pre><p>## </p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
             
-                <div class="post-preview">
-    <a href="/2018/11/13/Serializable与Parcelable介绍/">
-        <h1 class="post-title archive">
-            Serializable与Parcelable介绍
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-13
-    </p>
-</div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
             
-                <div class="post-preview">
-    <a href="/2018/11/13/算法之两数之和/">
-        <h1 class="post-title archive">
-            算法之两数之和
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-13
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/08/Activity的启动过程/">
-        <h1 class="post-title archive">
-            Activity启动过程
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-08
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/07/Android多进程模式/">
-        <h1 class="post-title archive">
-            Activity多进程模式
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-07
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/07/Android-IPC/">
-        <h1 class="post-title archive">
-            IPC
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-07
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/06/IntentFilter的匹配规则/">
-        <h1 class="post-title archive">
-            IntentFilter的匹配规则
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-06
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/06/Activity的标记位/">
-        <h1 class="post-title archive">
-            Activity的标记位
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-06
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/05/Activity的启动模式/">
-        <h1 class="post-title archive">
-            Activity的启动模式
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-05
-    </p>
-</div>
-            
-            <div class="archive-before-pagination"></div>
-            <ul class="pager">
-    
-    
-        <li class="next"><a href="/archives/page/2/">上一页  &rarr;</a></li>
-    
-</ul>
         </div>
     </div>
-</div>
-
+</article>
 
     <!-- Footer -->
     <hr>
