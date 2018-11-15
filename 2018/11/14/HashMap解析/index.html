@@ -194,7 +194,7 @@
                         
 
 
-<a href="/tags/java基础/">#java基础</a> <a href="/tags/Map/">#Map</a>
+<a href="/tags/java基础/">#java基础</a> <a href="/tags/Map/">#Map</a> <a href="/tags/数据结构/">#数据结构</a>
 
 
                     
@@ -223,8 +223,33 @@
 public class HashMap&lt;K,V&gt;
   extends AbstractMap&lt;K,V&gt;
   implements Map&lt;K,V&gt;, Cloneable, Serializable { }
-</code></pre><p>## </p>
-
+</code></pre><h2 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h2><h3 id="哈希冲突"><a href="#哈希冲突" class="headerlink" title="哈希冲突"></a>哈希冲突</h3><p>由于哈希算法被计算的数据是无限的，而计算后的结果范围有限，因此总会存在不同的数据经过计算后得到的值相同，这就是哈希冲突。（两个不同的数据计算后的结果一样）</p>
+<h3 id="HashMap存储的过程"><a href="#HashMap存储的过程" class="headerlink" title="HashMap存储的过程"></a>HashMap存储的过程</h3><p>HashMap是由数组 + 链表的形式组成，数组是HashMap的主体，链表则是主要为了解决哈希冲突而存在的；</p>
+<p>HashMap在调用put方法的是，首先需要确定插入位置(index)。这个时候通过一个哈希函数确定index的值，当插入的值越来越多，哈希冲突（哈希碰撞）几乎是无法避免的，所以会出现重复插入的情况，那么这个时候在这个位置用链表解决。所以HashMap数组的每一个元素不止是一个Entry对象，也是一个链表的头结点，通过Next的指针指向下一个Entry节点。当新来Entry映射到冲突位置，只需插入到对应的链表即可。</p>
+<p><img src="https://i.imgur.com/CgCf9kB.png" alt=""></p>
+<p>通过上面知道了put方法的工作过程，那么get的方法又是如何做的呢？<br>使用get方法根据key查找value的时候，首先会做一次hash映射，得到对应的index，但是上面说到哈希冲突的存在，所以一个index上面可能存在多个Entry，这个时候只需要顺着链表的头结点，往下查找即可。<br>值得注意的是：后插入的HashMap在链表的表头，因为后插入的被查找的可能性更大。</p>
+<h3 id="put方法解析"><a href="#put方法解析" class="headerlink" title="put方法解析"></a>put方法解析</h3><ol>
+<li>首先判断key是否为null，如果是null就调用putForNullKey(value)处理，默认存储到table[0]开头的链表，如果发现其中存在节点Entry的key为null，就替换新的value，然后返回旧的value，如果没发现key等于null的节点Entry，就增加新的节点。</li>
+<li>计算hashcode，再用计算的结果二次hash，通过indexFor(hash, table.length)找到Entry的索引 i 。</li>
+<li>遍历table[i]为头节点的链表，如果发现有节点的Has，key都相同的节点，替换掉旧的value。</li>
+<li>没有找到key的Hash相同的节点，就增加新的节点addEntry()。</li>
+<li>如果HashMap大小超过临界值，就要重新设置大小，扩容。</li>
+</ol>
+<h3 id="get方法解析"><a href="#get方法解析" class="headerlink" title="get方法解析"></a>get方法解析</h3><p>HashMap是非线程安全的，在get方法中会出现需要查询的key的hash存在的时候，另一个线程删除这个Entry，那么就会进入死循环，这个需要注意一下。</p>
+<pre><code>public V get(Object key) {
+    if (key == null)
+        return getForNullKey();
+    int hash = hash(key.hashCode());
+    for (Entry&lt;K,V&gt; e = table[indexFor(hash, table.length)];
+         e != null;
+         e = e.next) {
+        Object k;
+        if (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k)))
+            return e.value;
+    }
+    return null;
+}
+</code></pre>
 
                 
             </div>
