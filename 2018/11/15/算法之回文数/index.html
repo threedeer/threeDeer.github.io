@@ -227,7 +227,7 @@
 }
 </code></pre><p>可以看得出来，很简单，这个方法我开始是不知道的，百度百科里面抄来的。代码就是讲字符串反转再跟原始数据比较。</p>
 <p>看一眼执行效率：<br><img src="https://i.imgur.com/nRjggeL.png" alt=""><br>看样子懒方法不一定有好的效果。</p>
-<p>下面说说我的想法，所谓回文数就是正反一样，那么把数字拆开再反转必然是相等的，结合wo 另一篇的 <img src="https://threedeer.github.io/2018/11/14/%E7%AE%97%E6%B3%95%E4%B9%8B%E5%8F%8D%E8%BD%AC%E6%95%B4%E6%95%B0/" alt="反转整数"> ，就很容易解决了。</p>
+<p>下面说说我的想法，所谓回文数就是正反一样，那么把数字拆开再反转必然是相等的，结合我的另一篇的 <a href="https://threedeer.github.io/2018/11/14/%E7%AE%97%E6%B3%95%E4%B9%8B%E5%8F%8D%E8%BD%AC%E6%95%B4%E6%95%B0/">反转整数</a>，就很容易解决了。</p>
 <h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><pre><code> public boolean isPalindrome(int x) {
     if (x &lt; 0) {
         return false;
@@ -266,7 +266,8 @@
     }
 
 }
-</code></pre><p>代码逻辑其实比较简单，可能我写的比较复杂，回头优化一下。</p>
+</code></pre><p>看一下执行效率<br><img src="https://i.imgur.com/my4qzN7.png" alt=""></p>
+<p>代码逻辑其实比较简单，可能我写的比较复杂，回头优化一下。</p>
 
 
                 
