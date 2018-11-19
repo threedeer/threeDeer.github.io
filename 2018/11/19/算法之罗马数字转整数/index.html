@@ -23,7 +23,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="芒鞋胜马">
+        <meta property="og:title" content="算法之罗马数字转整数">
     
 
     <!--Open Graph Description-->
@@ -36,7 +36,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website">
+        <meta property="og:type" content="article">
     
 
     <!--Page Cover-->
@@ -55,7 +55,7 @@
 
     <!-- Title -->
     
-    <title>page - 芒鞋胜马</title>
+    <title>算法之罗马数字转整数 - 芒鞋胜马</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -160,83 +160,179 @@
 
     <!-- Main Content -->
     <!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
 <header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>芒鞋胜马</h1>
-                    <hr class="small">
-                    <span class="subheading">归去，也无风雨也无晴</span>
+                <div class="post-heading">
+                    <h1>算法之罗马数字转整数</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2018-11-19
+                        
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            
-                <div class="post-preview">
-    <a href="/2018/11/06/Activity的标记位/">
-        <h2 class="post-title">
-            Activity的标记位
-        </h2>
-        
-    </a>
-    <p class="post-meta">
-        <!-- Date and Author -->
-        
-        2018-11-06
-    </p>
-</div>
-<hr>
-            
-                <div class="post-preview">
-    <a href="/2018/11/05/Activity的启动模式/">
-        <h2 class="post-title">
-            Activity的启动模式
-        </h2>
-        
-    </a>
-    <p class="post-meta">
-        <!-- Date and Author -->
-        
-        2018-11-05
-    </p>
-</div>
-<hr>
-            
-                <div class="post-preview">
-    <a href="/2018/11/02/生命周期/">
-        <h2 class="post-title">
-            Activity生命周期
-        </h2>
-        
-    </a>
-    <p class="post-meta">
-        <!-- Date and Author -->
-        
-        2018-11-02
-    </p>
-</div>
-<hr>
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/算法/">#算法</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/算法/">算法</a>
+
+                    
+                </div>
             
 
-            <ul class="pager">
-    
-        <li class="previous"><a href="/">&larr;  下一页</a></li>
-    
-    
-</ul>
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="算法之罗马数字转整数"><a href="#算法之罗马数字转整数" class="headerlink" title="算法之罗马数字转整数"></a>算法之罗马数字转整数</h1><h2 id="描述："><a href="#描述：" class="headerlink" title="描述："></a>描述：</h2><p>罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。</p>
+<pre><code>字符          数值
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000
+</code></pre><p>例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。</p>
+<p>通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况：</p>
+<p>I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。<br>X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。<br>C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。<br>给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。</p>
+<p><strong>示例 1:</strong></p>
+<pre><code>输入: &quot;III&quot;
+输出: 3
+</code></pre><p><strong>示例 2:</strong></p>
+<pre><code>输入: &quot;IV&quot;
+输出: 4
+</code></pre><p><strong>示例 3:</strong></p>
+<pre><code>输入: &quot;IX&quot;
+输出: 9
+</code></pre><p><strong>示例 4:</strong></p>
+<pre><code>输入: &quot;LVIII&quot;
+输出: 58
+解释: L = 50, V= 5, III = 3
+</code></pre><p><strong>示例 5:</strong></p>
+<pre><code>输入: &quot;MCMXCIV&quot;
+输出: 1994
+解释: M = 1000, CM = 900, XC = 90, IV = 4
+</code></pre><h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><ol>
+<li>根据字符串去做比较，每个字符代表不同的意思，利用for循环遇到什么加上即可，但是其中有6种特殊情况需要处理：IV、IX、XL、XC、CD、CM；很显然，一个数据中不可能同一个情况出现两次，只需要特殊处理特殊情况就行。所以循环遍历字符串，将罗马数字转换成对应数字，再将特殊情况处理并减去即可；需要注意的是，特殊处理的时候第一次加上了某个数，再减去的话需要减去双倍的；比如IV，执行的时候是 1+5 = 6，而实际结果应该是4。</li>
+<li>当我们观察罗马字符串，大多时候从右向左数值应该是递增的，比如：LVIII，VI等，但是一旦出现左边数值比右边大，那么就说明出现上述的特殊情况，如 IX,IV,MCMXCIV等等，这个时候只要将右边的值减去左边的值就可以得到当前位置的确切值了。</li>
+</ol>
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><h4 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h4><pre><code> public int romanToInt(String s) {
+    int result = 0;
+    int length = 0;
+
+    while (length &lt; s.length()) {
+        switch (String.valueOf(s.charAt(length))) {
+            // I X C 可能因为右边的内容而有不同的表现值
+            case &quot;I&quot;:
+                result += 1;
+                break;
+            case &quot;X&quot;:
+                result += 10;
+                break;
+            case &quot;C&quot;:
+                result += 100;
+                break;
+            case &quot;V&quot;:
+                result += 5;
+                break;
+            case &quot;L&quot;:
+                result += 50;
+                break;
+            case &quot;D&quot;:
+                result += 500;
+                break;
+            case &quot;M&quot;:
+                result += 1000;
+                break;
+            default:
+                break;
+        }
+        length++;
+    }
+
+    if (s.contains(&quot;IV&quot;) || s.contains(&quot;IX&quot;)) {
+        result -= 2;
+    }
+    if (s.contains(&quot;XC&quot;) || s.contains(&quot;XL&quot;)) {
+        result -= 20;
+
+    }
+    if (s.contains(&quot;CD&quot;) || s.contains(&quot;CM&quot;)) {
+        result -= 200;
+    }
+
+
+    return result;
+}
+</code></pre><p><strong>执行效率图</strong><br><img src="https://i.imgur.com/NXc6eVE.png" alt=""></p>
+<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><pre><code>public int romanToInt2(String s) {
+    if (s == null || s.length() == 0) return -1;
+
+    HashMap&lt;Character, Integer&gt; map = new HashMap&lt;Character, Integer&gt;();
+    map.put(&apos;I&apos;, 1);
+    map.put(&apos;V&apos;, 5);
+    map.put(&apos;X&apos;, 10);
+    map.put(&apos;L&apos;, 50);
+    map.put(&apos;C&apos;, 100);
+    map.put(&apos;D&apos;, 500);
+    map.put(&apos;M&apos;, 1000);
+    int len = s.length(), result = map.get(s.charAt(len - 1));
+    for (int i = len - 2; i &gt;= 0; i--) {
+        if (map.get(s.charAt(i)) &gt;= map.get(s.charAt(i + 1)))
+            result += map.get(s.charAt(i));
+        else
+            result -= map.get(s.charAt(i));
+    }
+    return result;
+}
+</code></pre><p><strong>执行效率图</strong><br><img src="https://i.imgur.com/XyohcAc.png" alt=""></p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
         </div>
     </div>
-</div>
-
-
+</article>
 
     <!-- Footer -->
     <hr>
