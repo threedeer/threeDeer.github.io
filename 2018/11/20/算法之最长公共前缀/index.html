@@ -23,7 +23,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="分类">
+        <meta property="og:title" content="算法之最长公共前缀">
     
 
     <!--Open Graph Description-->
@@ -55,7 +55,7 @@
 
     <!-- Title -->
     
-    <title>分类 - 芒鞋胜马</title>
+    <title>算法之最长公共前缀 - 芒鞋胜马</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -159,75 +159,150 @@
 </nav>
 
     <!-- Main Content -->
-    
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
 
-
-    <header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="site-heading">
-                        <h1>分类</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Content -->
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                
-                    <div class="post-preview">
-    <a href="/categories/Activity/">
-        <h1 class="post-title archive">
-            Activity
-        </h1>
-    </a>
-</div>
-                
-                    <div class="post-preview">
-    <a href="/categories/IPC/">
-        <h1 class="post-title archive">
-            IPC
-        </h1>
-    </a>
-</div>
-                
-                    <div class="post-preview">
-    <a href="/categories/算法/">
-        <h1 class="post-title archive">
-            算法
-        </h1>
-    </a>
-</div>
-                
-                    <div class="post-preview">
-    <a href="/categories/序列化/">
-        <h1 class="post-title archive">
-            序列化
-        </h1>
-    </a>
-</div>
-                
-                    <div class="post-preview">
-    <a href="/categories/Java集合/">
-        <h1 class="post-title archive">
-            Java集合
-        </h1>
-    </a>
-</div>
-                
-                <div class="archive-before-pagination"></div>
+                <div class="post-heading">
+                    <h1>算法之最长公共前缀</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2018-11-20
+                        
+                    </span>
+                </div>
             </div>
         </div>
     </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
 
 
+<a href="/tags/算法/">#算法</a> <a href="/tags/字符串前缀/">#字符串前缀</a>
 
 
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
 
+<a href="/categories/算法/">算法</a>
+
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="算法之最长公共前缀"><a href="#算法之最长公共前缀" class="headerlink" title="算法之最长公共前缀"></a>算法之最长公共前缀</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>编写一个函数来查找字符串数组中的最长公共前缀。</p>
+<p>如果不存在公共前缀，返回空字符串 “”。</p>
+<p><strong>示例 1:</strong></p>
+<pre><code>输入: [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]
+输出: &quot;fl&quot;
+</code></pre><p><strong>示例 2:</strong></p>
+<pre><code>输入: [&quot;dog&quot;,&quot;racecar&quot;,&quot;car&quot;]
+输出: &quot;&quot;
+解释: 输入不存在公共前缀。
+</code></pre><p>说明:<br>所有输入只包含小写字母 a-z 。</p>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>字符串数组中公共前缀，那么首先考虑特殊情况，空数组，里面空字符串这很明显就应该直接返回空字符串；数组长度为1的时候，直接返回里面唯一的字符串即可；<br>普通情况下，如果里面有相同的，我想到的是先拿第一字符串出来，经过双重循环来判断。第一次循环字符串，从第一个字符开始，每次拿这个字符与数组后面的字符串通过startsWith()方法进行比较，如果后面的字符串是以当前截取的字符串开始，那么继续循环，否则跳出循环；<br>自己这种实现方法虽然简单直接，但是总觉得不优雅，后面再网上找了个二分法实现，记录一下。</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="代码一"><a href="#代码一" class="headerlink" title="代码一"></a>代码一</h3><pre><code>public String longestCommonPrefix(String[] strs) {
+    if (strs == null || strs.length == 0) {
+        //特殊情况
+        return &quot;&quot;;
+    }
+    if (strs.length == 1) {
+        //特殊情况
+        return strs[0];
+    }
+     String result = &quot;&quot;;
+    for (int j = 1; j &lt;= strs[0].length(); j++) {
+        boolean noExist = false;
+        String val1 = strs[0].substring(0, j);
+        for (int k = 1; k &lt; strs.length; k++) {
+            if (strs[k].startsWith(val1)) {
+                continue;
+            } else {
+                noExist = true;
+                break;
+            }
+
+        }
+        if (noExist) {
+            break;
+        } else {
+            result = val1;
+            continue;
+        }
+    }
+    return result;
+}
+</code></pre><h4 id="执行效率图"><a href="#执行效率图" class="headerlink" title="执行效率图"></a>执行效率图</h4><p><img src="https://i.imgur.com/ojnJdp7.png" alt=""></p>
+<h3 id="二分法实现"><a href="#二分法实现" class="headerlink" title="二分法实现"></a>二分法实现</h3><h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><p>首先需要找出最短的字符串，最长的前缀长度不会超过此字符串，然后使用二分法查找方式，这里主要涉及到二分法查找，如果不清楚可以先了解一下。<br><img src="https://i.imgur.com/pGBi7lu.png" alt=""></p>
+<pre><code>//二分法查找
+public String longestCommonPrefix(String[] strs) {
+    if (strs == null || strs.length == 0)
+        //特殊情况
+        return &quot;&quot;;
+    int minLen = Integer.MAX_VALUE;
+    for (String str : strs)
+        //找出最短字符串的长度
+        minLen = Math.min(minLen, str.length());
+    int low = 1;
+    int high = minLen;
+    while (low &lt;= high) {
+    //利用二分法查找实现
+        int middle = (low + high) / 2;
+        if (isCommonPrefix(strs, middle))
+            low = middle + 1;
+        else
+            high = middle - 1;
+    }
+    return strs[0].substring(0, (low + high) / 2);
+}
+
+private boolean isCommonPrefix(String[] strs, int len) {
+    String str1 = strs[0].substring(0, len);
+    for (int i = 1; i &lt; strs.length; i++)
+        if (!strs[i].startsWith(str1))
+            return false;
+    return true;
+}
+</code></pre>
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
 
     <!-- Footer -->
     <hr>
