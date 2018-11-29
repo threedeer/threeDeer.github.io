@@ -23,7 +23,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="芒鞋胜马">
+        <meta property="og:title" content="Android中的Bundle">
     
 
     <!--Open Graph Description-->
@@ -36,7 +36,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website">
+        <meta property="og:type" content="article">
     
 
     <!--Page Cover-->
@@ -55,7 +55,7 @@
 
     <!-- Title -->
     
-    <title>page - 归档 - 芒鞋胜马</title>
+    <title>Android中的Bundle - 芒鞋胜马</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -159,129 +159,88 @@
 </nav>
 
     <!-- Main Content -->
-    
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
 
-<!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
 <header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>归档</h1>
+                <div class="post-heading">
+                    <h1>Android中的Bundle</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2018-11-29
+                        
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/IPC/">#IPC</a> <a href="/tags/Bundle/">#Bundle</a> <a href="/tags/数据传递/">#数据传递</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/IPC/">IPC</a>
+
+                    
+                </div>
             
-                <div class="post-preview">
-    <a href="/2018/11/08/Activity的启动过程/">
-        <h1 class="post-title archive">
-            Activity启动过程
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-08
-    </p>
-</div>
+
+            <!-- Gallery -->
             
-                <div class="post-preview">
-    <a href="/2018/11/07/Android-IPC/">
-        <h1 class="post-title archive">
-            IPC
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-07
-    </p>
-</div>
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="Android中的Bundle"><a href="#Android中的Bundle" class="headerlink" title="Android中的Bundle"></a>Android中的Bundle</h1><p>Bundle主要用于传递数据；它保存的数据是以键值对的形式存在的。<br>可以传递的数据类型：boolean、byte、int、long、float、double、String等基本类型以及对应的数组，也可以是对象或对象数组，但是此对象必须实现了Serrializable或者Parcelable接口。</p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>在Activity、Service和Receiver都支持Intent传递Bundle数据，Bundle实现了Parcelable接口，所以Bundle能在不同的进程间传输。</p>
+<pre><code>Bundle mBundle =  new  Bundle();   
+mBundle.putString( &quot;DataTag&quot; ,  &quot;要传过去的数据&quot; );  
+
+Intent intent = new Intent();    
+intent.putExtras(mBundle);
+startActivity(intent);
+</code></pre><h2 id="Bundle-和-Intent-的区别"><a href="#Bundle-和-Intent-的区别" class="headerlink" title="Bundle 和 Intent 的区别"></a>Bundle 和 Intent 的区别</h2><p>从上面的Bundle的用法，其实就能看出一点，Bundle主要是用来存储数据，Intent更偏向数据传递。</p>
+<h2 id="关于Bundle跨进程通信问题"><a href="#关于Bundle跨进程通信问题" class="headerlink" title="关于Bundle跨进程通信问题"></a>关于Bundle跨进程通信问题</h2><p>Bundle在跨进程通信时，传输的信息也是通过Intent发送出去。</p>
+<p>特殊场景：A进程正在进行一个计算，计算完成之后启动B进程的一个组件，并把计算结果传递给B进程，但是Bundle不能存储此结果，因此不能通过Intent出函数。<br>解决办法：通过Intent启动B进程的一个Service组件（如IntentService），让Service后台进行计算，计算完毕后再启动B进程中需要启动目标组件，由于Service也运行在B进程中，所以目标结果能直接获取计算结果。</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
             
-                <div class="post-preview">
-    <a href="/2018/11/07/Android多进程模式/">
-        <h1 class="post-title archive">
-            Activity多进程模式
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-07
-    </p>
-</div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
             
-                <div class="post-preview">
-    <a href="/2018/11/06/IntentFilter的匹配规则/">
-        <h1 class="post-title archive">
-            IntentFilter的匹配规则
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-06
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/06/Activity的标记位/">
-        <h1 class="post-title archive">
-            Activity的标记位
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-06
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/05/Activity的启动模式/">
-        <h1 class="post-title archive">
-            Activity的启动模式
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-05
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/02/生命周期/">
-        <h1 class="post-title archive">
-            Activity生命周期
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-02
-    </p>
-</div>
-            
-            <div class="archive-before-pagination"></div>
-            <ul class="pager">
-    
-        <li class="previous"><a href="/archives/">&larr;  下一页</a></li>
-    
-    
-</ul>
         </div>
     </div>
-</div>
-
+</article>
 
     <!-- Footer -->
     <hr>
