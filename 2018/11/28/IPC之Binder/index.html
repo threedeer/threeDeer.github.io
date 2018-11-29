@@ -23,7 +23,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="芒鞋胜马">
+        <meta property="og:title" content="IPC之Binder">
     
 
     <!--Open Graph Description-->
@@ -36,7 +36,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website">
+        <meta property="og:type" content="article">
     
 
     <!--Page Cover-->
@@ -55,7 +55,7 @@
 
     <!-- Title -->
     
-    <title>page - 归档：2018/11 - 芒鞋胜马</title>
+    <title>IPC之Binder - 芒鞋胜马</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -159,116 +159,108 @@
 </nav>
 
     <!-- Main Content -->
-    
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
 
-<!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
 <header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>2018/11</h1>
+                <div class="post-heading">
+                    <h1>IPC之Binder</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2018-11-28
+                        
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/IPC/">#IPC</a> <a href="/tags/Binder机制/">#Binder机制</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/IPC/">IPC</a>
+
+                    
+                </div>
             
-                <div class="post-preview">
-    <a href="/2018/11/07/Android-IPC/">
-        <h1 class="post-title archive">
-            IPC
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-07
-    </p>
-</div>
+
+            <!-- Gallery -->
             
-                <div class="post-preview">
-    <a href="/2018/11/07/Android多进程模式/">
-        <h1 class="post-title archive">
-            Activity多进程模式
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-07
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/06/IntentFilter的匹配规则/">
-        <h1 class="post-title archive">
-            IntentFilter的匹配规则
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-06
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/06/Activity的标记位/">
-        <h1 class="post-title archive">
-            Activity的标记位
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-06
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/05/Activity的启动模式/">
-        <h1 class="post-title archive">
-            Activity的启动模式
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-05
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/02/生命周期/">
-        <h1 class="post-title archive">
-            Activity生命周期
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-02
-    </p>
-</div>
-            
-            <div class="archive-before-pagination"></div>
-            <ul class="pager">
-    
-        <li class="previous"><a href="/archives/2018/11/">&larr;  下一页</a></li>
-    
-    
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="IPC之Binder"><a href="#IPC之Binder" class="headerlink" title="IPC之Binder"></a>IPC之Binder</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>Binder在不同的角度有不同的解释</p>
+<ol>
+<li>从API角度：是Android中的一个类，实现了IBinder接口；</li>
+<li>从IPC角度：是Android中的一种跨进程通信方式；</li>
+<li>从FrameWork层：是ServiceManager连接各种Manager（ActivityManager、WindowManager等等）和相应的ManagerService的桥梁；</li>
+<li>从Android应用层：是客户端和服务端通信的媒介（当bindService的时候，服务端会返回一个包含了服务端业务调用的Binder对象，通过这个Binder对象，客户端就可以获取服务端提供的服务或者数据，这里的服务包括普通服务和基于AIDL的服务）。</li>
+</ol>
+<h2 id="Binder的应用"><a href="#Binder的应用" class="headerlink" title="Binder的应用"></a>Binder的应用</h2><p>Binder在Android中的关系图<br><img src="https://i.imgur.com/U0qn9Z0.png" alt="在Android中Binder的应用"></p>
+<p>在Android中，Binder主要用在Service中，包括AIDL和Messenger，其中普通的Service中的Binder不涉及进程间的通信。从上面的关系图中可以看出Messenger底层其实就是AIDL。</p>
+<h2 id="Binder机制（IPC角度）"><a href="#Binder机制（IPC角度）" class="headerlink" title="Binder机制（IPC角度）"></a>Binder机制（IPC角度）</h2><p>Binder通信示意图<br><img src="https://img-blog.csdn.net/20161201135908041" alt=""></p>
+<p>可以看出Binder实际上是C/S架构。包含了四个部分：服务端、客户端、Binder驱动和serviceManager。</p>
+<p>当一个服务进程启动后，需要将其中的Service注册到ServiceManager中，客户端想要具体的Service直接再ServiceManager中查找即可。查到具体的Service引用后即可享服务端发送请求，服务端执行完成后就返回。如下：</p>
+<p><img src="https://img-blog.csdn.net/20161201142217166" alt=""></p>
+<p>即Client要想和Service交互，需要向ServiceManager申请获得该Service在Binder中的引用，并存放在自身的mRemote变量中，之后通过mRemote调用。</p>
+<h2 id="Binder工作流程"><a href="#Binder工作流程" class="headerlink" title="Binder工作流程"></a>Binder工作流程</h2><p><img src="https://i.imgur.com/45nCz48.png" alt="Binder工作流程"></p>
+<ol>
+<li>Client发起远程请求，进入Binder驱动，自身线程被挂起；(Client)（用户空间）</li>
+<li>Binder将参数写入data中；（ServiceManager）（用户空间 -&gt; 内核空间）</li>
+<li>Binder将data传送到Service；（Service）（内核空间 -&gt; 用户空间）</li>
+<li>Service处理完毕之后，再将数据写入Binder；（Binder工作流程）（用户空间 -&gt; 内核空间）</li>
+<li>Binder返回数据给Client，并换线Client。(Client)（内核空间 -&gt; 用户空间）</li>
+</ol>
+<p>上述过程实际上就是Binder的数据在内存中存储的过程。在A线程访问B线程的过程中实际上只经历了一次复制过程,所以这也是Android选择Binder机制作为IPC过程的最主要的原因。</p>
+<p>需要注意两点：</p>
+<ul>
+<li>当客户端发起远程请求时，由于当前线程会被挂起，直至服务端进程返回数据，所以如果一个远程方法很耗时，那么不能再UI线程中发起远程请求；</li>
+<li>由于服务端的Binder方法运行在Binder线程池中，所以Binder方法不管是否耗时，都应该采用同步的方式实现，因为它已经运行在一个线程中。</li>
 </ul>
+<p>关于上述提到的内核空间、用户空间和ServiceManager以及Client、Binder、service之间的关系，参照下面的示意图：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5713484-b12db11921797839.png" alt="Android的进程架构"></p>
+<p><img src="https://i.imgur.com/8rnpj3F.png" alt="Binder的C/S架构"></p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
         </div>
     </div>
-</div>
-
+</article>
 
     <!-- Footer -->
     <hr>
