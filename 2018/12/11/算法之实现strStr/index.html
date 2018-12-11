@@ -23,7 +23,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="芒鞋胜马">
+        <meta property="og:title" content="算法之实现strStr">
     
 
     <!--Open Graph Description-->
@@ -36,7 +36,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website">
+        <meta property="og:type" content="article">
     
 
     <!--Page Cover-->
@@ -55,7 +55,7 @@
 
     <!-- Title -->
     
-    <title>page - 归档：2018 - 芒鞋胜马</title>
+    <title>算法之实现strStr - 芒鞋胜马</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -159,170 +159,106 @@
 </nav>
 
     <!-- Main Content -->
-    
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
 
-<!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
 <header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>2018</h1>
+                <div class="post-heading">
+                    <h1>算法之实现strStr</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2018-12-11
+                        
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/算法/">#算法</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/算法/">算法</a>
+
+                    
+                </div>
             
-                <div class="post-preview">
-    <a href="/2018/11/20/算法之最长公共前缀/">
-        <h1 class="post-title archive">
-            算法之最长公共前缀
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-20
-    </p>
-</div>
+
+            <!-- Gallery -->
             
-                <div class="post-preview">
-    <a href="/2018/11/19/算法之罗马数字转整数/">
-        <h1 class="post-title archive">
-            算法之罗马数字转整数
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-19
-    </p>
-</div>
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="算法之实现strStr-函数"><a href="#算法之实现strStr-函数" class="headerlink" title="算法之实现strStr()函数"></a>算法之实现strStr()函数</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。</p>
+<p>示例 1:</p>
+<pre><code>输入: haystack = &quot;hello&quot;, needle = &quot;ll&quot;
+输出: 2
+</code></pre><p>示例 2:</p>
+<pre><code>输入: haystack = &quot;aaaaa&quot;, needle = &quot;bba&quot;
+输出: -1
+</code></pre><p>说明:</p>
+<pre><code>当 needle 是空字符串时，我们应当返回什么值呢？这是一个在面试中很好的问题。
+对于本题而言，当 needle 是空字符串时我们应当返回 0 。这与C语言的 strstr() 以及 Java的 indexOf() 定义相符。
+</code></pre><h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>这个只需要知道字符串的 substring()方法 就很简单了，就是一个移位比较问题。</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><pre><code>public int strStr(String haystack, String needle) {
+    if (needle.length() &gt; haystack.length()) {
+        return -1;
+    }
+    if (needle.equals(haystack)){
+        return 0;
+    }
+    String str;
+    int count = haystack.length() - needle.length();
+    for (int i = 0; i &lt;= count ; i++) {
+        str = haystack.substring(i, i + needle.length() );
+        if (str.equals(needle)) {
+            return i;
+        }
+    }
+    return -1;
+}
+</code></pre><h2 id="执行效率"><a href="#执行效率" class="headerlink" title="执行效率"></a>执行效率</h2><p><img src="https://i.imgur.com/8qk4VDA.png" alt=""><br>看的出来，这个题目确实简单，而且大家的方法都很接近。</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
             
-                <div class="post-preview">
-    <a href="/2018/11/15/算法之回文数/">
-        <h1 class="post-title archive">
-            算法之回文数
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-15
-    </p>
-</div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
             
-                <div class="post-preview">
-    <a href="/2018/11/14/HashMap解析/">
-        <h1 class="post-title archive">
-            HashMap解析
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-14
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/14/算法之反转整数/">
-        <h1 class="post-title archive">
-            算法之反转整数
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-14
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/13/Serializable与Parcelable介绍/">
-        <h1 class="post-title archive">
-            Serializable与Parcelable介绍
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-13
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/13/算法之两数之和/">
-        <h1 class="post-title archive">
-            算法之两数之和
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-13
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/08/Activity的启动过程/">
-        <h1 class="post-title archive">
-            Activity启动过程
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-08
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/07/Android-IPC/">
-        <h1 class="post-title archive">
-            IPC
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-07
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/07/Android多进程模式/">
-        <h1 class="post-title archive">
-            Activity多进程模式
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-07
-    </p>
-</div>
-            
-            <div class="archive-before-pagination"></div>
-            <ul class="pager">
-    
-        <li class="previous"><a href="/archives/2018/">&larr;  下一页</a></li>
-    
-    
-        <li class="next"><a href="/archives/2018/page/3/">上一页  &rarr;</a></li>
-    
-</ul>
         </div>
     </div>
-</div>
-
+</article>
 
     <!-- Footer -->
     <hr>
