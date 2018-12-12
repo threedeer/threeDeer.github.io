@@ -216,10 +216,100 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <h1 id="Messenger"><a href="#Messenger" class="headerlink" title="Messenger"></a>Messenger</h1><p>Messenger是一种轻量级的IPC方案，底层是AIDL；对AIDL进行了封装，一次处理一个请求，所以无需考虑线程同步问题。</p>
 <h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
-<li>服务端进程<br> 首先在服务端创建一个Service，来处理客户端的链接请求，同时创建一个Handler 并通过它来创建一个 Messenger 对象，然后在service的onBind 中返回这个Messenger对象底层的Binder。</li>
-<li>客户端进程<br> 客户端进程中，首先绑定服务端Service，绑定成功后用服务端返回的IBinder对象创建一个Messenger</li>
+<li>服务端进程</li>
 </ol>
+<ul>
+<li>首先在服务端创建一个Service，来处理客户端的链接请求；</li>
+<li>同时创建一个Handler 并通过它来创建一个 Messenger 对象，然后在service的onBind 中返回这个Messenger对象底层的Binder。</li>
+</ul>
+<ol start="2">
+<li>客户端进程</li>
+</ol>
+<ul>
+<li>首先绑定服务端Service，绑定成功后用服务端返回的IBinder对象创建一个Messenger；</li>
+<li>通过这个Messenger就可以向服务端发送消息，消息类型为Messenger对象</li>
+<li>服务端回应客户端就要像服务端一样，创建一个Handler并新建一个Messenger对象，并把这个Messenger对象通过Message的replyTo参数传递给服务端，服务端通过这个参数就能回应客户端。</li>
+</ul>
+<p>说了这么多，不如看例子。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><pre><code>/**
+ * @author T
+ * @date 2018/12/11
+ * 创建一个Service
+ */
+public class MessengerOfIpcService extends Service {
+    private static final String TAG = &quot;MessengerOfIpc&quot;;
 
+    /**
+     * 创建一个handler
+     */
+    private static class MessengerHandler extends Handler {
+        /**
+         * 处理消息
+         *
+         * @param msg
+         */
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    Log.i(TAG,&quot;Client：&quot; + msg.getData().getString(&quot;msg&quot;));
+                    break;
+                default:
+                    super.handleMessage(msg);
+            }
+        }
+    }
+
+    /**
+     * 创建Messenger对象
+     */
+    Messenger mMessenger = new Messenger(new MessengerHandler());
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        //获得底层Binder
+        return mMessenger.getBinder();
+    }
+}
+</code></pre><p>当然 不能忘了在Manifest里面注册我们的服务</p>
+<pre><code>&lt;service  
+     android:name=&quot;com.demo.t.ipc.MessengerOfIpcService&quot;
+     android:process=&quot;:binderPool&quot; /&gt;
+</code></pre><h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><p>首先当然是创建连接</p>
+<pre><code> /**
+ * MessengerOfIpcService
+ */
+
+private Messenger mMessenger;
+private ServiceConnection messengerConn = new ServiceConnection() {
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service) {
+        mMessenger = new Messenger(service);
+        Message  message = Message.obtain(null,0);
+        Bundle bundle = new Bundle();
+        bundle.putString(&quot;msg&quot;,&quot;hi！I am Client!&quot;);
+        message.setData(bundle);
+        try {
+            mMessenger.send(message);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+
+    }
+};
+</code></pre><p>然后再在onCreate方法里面绑定service</p>
+<pre><code>Intent intent = new Intent();
+intent.setClass(this,MessengerOfIpcService.class);
+bindService(intent,messengerConn, Service.BIND_AUTO_CREATE);
+</code></pre><p>最后别忘了在onDestory中解绑</p>
+<pre><code>unbindService(messengerConn);
+</code></pre>
 
                 
             </div>
