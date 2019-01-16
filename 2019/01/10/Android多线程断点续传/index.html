@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="归去，也无风雨也无晴">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="芒鞋胜马">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Android多线程断点续传">
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="归去，也无风雨也无晴">
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="芒鞋胜马">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="https://threedeer.github.io/img/contact-bg.jpg">
+    
+
+        <meta name="twitter:card" content="summary_large_image">
+
+    
+
+    
+        <meta name="twitter:image" content="https://threedeer.github.io/img/contact-bg.jpg">
+    
+
+    <!-- Title -->
+    
+    <title>Android多线程断点续传 - 芒鞋胜马</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+    <link rel="icon" href="/img/favicon.jpg">
+    
+
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">芒鞋胜马</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                首页
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                归档
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                标签
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                分类
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/threedeer">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Android多线程断点续传</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2019-01-10
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/多线程/">#多线程</a> <a href="/tags/断点续传/">#断点续传</a> <a href="/tags/MVVM/">#MVVM</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/多线程/">多线程</a>
+
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="Android多线程断点续传"><a href="#Android多线程断点续传" class="headerlink" title="Android多线程断点续传"></a>Android多线程断点续传</h1><p>目的：本篇主要是为了复习MVVM模式和断点续传。</p>
+<p>准备工作：MVVM模式，权限申请以及多线程下载。</p>
+<h2 id="MVVM模式"><a href="#MVVM模式" class="headerlink" title="MVVM模式"></a>MVVM模式</h2><h3 id="MVVM与MVP的区别"><a href="#MVVM与MVP的区别" class="headerlink" title="MVVM与MVP的区别"></a>MVVM与MVP的区别</h3><p><img src="https://i.imgur.com/1qjnjCx.png" alt="MVVM"></p>
+<p><img src="https://i.imgur.com/qb4IbSn.png" alt="MVP"></p>
+<p>从图中看出，MVVM中View与ViewModel是双向绑定，改变ViewModel会直接作用到View上。而View把事件传递给ViewModel，ViewModel更新Model。<br>而MVP中，Presenter是用于沟通View和model的联系，并没有完全分离View跟Model，只是通过Presenter通知。</p>
+<h4 id="MVVM的优点"><a href="#MVVM的优点" class="headerlink" title="MVVM的优点"></a>MVVM的优点</h4><ol>
+<li>双向绑定，Model变化，ViewModel自动更新，View也会自动变化</li>
+<li>方便单元测试ui和vm逻辑完全分离。</li>
+<li>很方便做ui的a/b测试可以共用同一个vm。</li>
+</ol>
+<h4 id="MVVM的缺点"><a href="#MVVM的缺点" class="headerlink" title="MVVM的缺点"></a>MVVM的缺点</h4><ol>
+<li>双向绑定，导致Bug调试困难。</li>
+<li>由于要遵守模式的规范调用流程变得复杂。</li>
+<li>vm中会有很多被观察者变量如果业务逻辑非常复杂会消耗更多内存。</li>
+</ol>
+<h2 id="多线程下载"><a href="#多线程下载" class="headerlink" title="多线程下载"></a>多线程下载</h2><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li><p>开启新线程</p>
+<p> private Thread[] mThreads;</p>
+</li>
+</ol>
+<pre><code>if (mThreads == null) {
+   mThreads = new Thread[threadCount];
+   }
+</code></pre><ol start="2">
+<li><p>建立链接请求</p>
+<pre><code> URL url = new URL(loadUrl);
+HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+conn.setConnectTimeout(5000);
+conn.setRequestMethod(&quot;GET&quot;);
+</code></pre></li>
+<li><p>记录读取位置</p>
+<pre><code>int code = conn.getResponseCode();
+Log.w(TAG, &quot;run: &quot; + &quot;返回码&quot;+code);
+if (code == 200) {
+      //请求成功
+    fileLength = conn.getContentLength();
+
+    //根据文件大小，先创建一个空文件
+    //RandomAccessFile是Java输入/输出流体系中功能最丰富的文件内容访问类，
+    // 既可以读取文件内容，也可以向文件输出数据。
+    // 与普通的输入/输出流不同的是，RandomAccessFile支持跳到文件任意位置读写数据，
+    // RandomAccessFile对象包含一个记录指针，用以标识当前读写处的位置，
+    // 当程序创建一个新的RandomAccessFile对象时，该对象的文件记录指针对于文件头（也就是0处）
+    // 当读写n个字节后，文件记录指针将会向后移动n个字节。
+    // 除此之外，RandomAccessFile可以自由移动该记录指针
+    RandomAccessFile raf = new RandomAccessFile(filePath, &quot;rwd&quot;);
+    raf.setLength(fileLength);
+    raf.close();
+    //计算各线程下载的数据段
+    int blockLength = fileLength / threadCount;
+    Log.w(TAG, &quot;run: &quot; + &quot;数据段&quot;+blockLength);
+    SharedPreferences sp = mContext.getSharedPreferences(SP_NAME,Context.MODE_PRIVATE);
+    //获取上次取消下载的进度，若没有返回0
+    currLength = sp.getInt(CURR_LENGTH,0);
+    for (int i = 0; i &lt; threadCount; i++) {
+        //开始位置，获取上次取消下载的进度，默认返回 i * blockLength 即第i个线程开始下载的位置
+        int startPosition = sp.getInt(SP_NAME + (i +1), i * blockLength);
+        Log.w(TAG, &quot;run: &quot; + &quot;上次取消下载的进度&quot;+startPosition);
+        //结束位置，-1是为了防止上一个线程和下一个线程重复下载衔接处的数据
+        int endPosition = (i + 1) * blockLength - 1;
+        //将最后一个线程结束位置扩大，防止文件下载不完全，大了没影响，小了文件失效
+        if ((i + 1) == threadCount){
+            endPosition = endPosition * 2;
+        }
+        mThreads[i] = new DownThread(i + 1,startPosition,endPosition);
+        mThreads[i].start();
+    }
+}
+</code></pre></li>
+<li><p>写入内存</p>
+<pre><code>private class DownThread extends Thread{
+    /**
+     * 是否继续下载
+     */
+    private boolean isGoOn = true;
+
+    private int threadId;
+    /**
+     * 开始下载点
+     */
+    private int startPosition;
+    /**
+     * 结束下载点
+     */
+    private int endPosition;
+    /**
+     * 当前线程的下载进度
+     */
+    private int currPosition;
+
+    private DownThread(int threadId, int startPosition, int endPosition) {
+        this.threadId = threadId;
+        this.startPosition = startPosition;
+        currPosition = startPosition;
+        this.endPosition = endPosition;
+        runningThreadCount ++;
+    }
+
+    @Override
+    public void run() {
+        SharedPreferences sp = mContext.getSharedPreferences(SP_NAME,Context.MODE_PRIVATE);
+        try {
+            URL url = new URL(loadUrl);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod(&quot;GET&quot;);
+            conn.setRequestProperty(&quot;Range&quot;,&quot;bytes=&quot; + startPosition + &quot;-&quot; + endPosition);
+            conn.setConnectTimeout(5000);
+
+            Log.w(TAG, &quot;run: &quot; + &quot;&quot;+&quot;Range&quot;+&quot;bytes=&quot; + startPosition + &quot;-&quot; + endPosition);
+            //若请求头加上Range这个参数，则返回状态码为206，而不是200
+            if (conn.getResponseCode() == 206){
+                InputStream is = conn.getInputStream();
+                RandomAccessFile raf = new RandomAccessFile(filePath,&quot;rwd&quot;);
+                //跳到指定位置开始写数据
+                raf.seek(startPosition);
+                Log.w(TAG, &quot;run: &quot; + &quot;startPosition&quot;+ startPosition + &quot;endPosition&quot; + endPosition);
+                int len;
+                byte[] buffer = new byte[1024];
+                while ((len = is.read(buffer)) != -1){
+                    //是否继续下载
+                    if (!isGoOn){
+                        break;
+                    }
+                    //回调当前进度
+                    if (mDownloadListener != null){
+                        currLength += len;
+                        int progress = (int)((float) currLength / (float) fileLength * 100);
+                        handler.sendEmptyMessage(progress);
+                        Log.w(TAG, &quot;run: &quot; + &quot;当前进度&quot;+ progress);
+                    }
+                    raf.write(buffer,0,len);
+                    //写完后将当前指针后移，为取消下载时保存当前进度做准备
+                    currPosition += len;
+                    Log.w(TAG, &quot;run: &quot; + &quot;写完后将当前指针后移&quot;+ currPosition);
+                    synchronized (DOWNLOAD_PAUSE){
+                        if (stateDownload.equals(DOWNLOAD_PAUSE)){
+                            DOWNLOAD_PAUSE.wait();
+                            Log.w(TAG, &quot;run: &quot; + &quot;暂停&quot;+ currPosition);
+                        }
+                    }
+                }
+                is.close();
+                raf.close();
+                //线程计数器-1;
+                runningThreadCount --;
+                //若取消下载，则直接返回
+                if (!isGoOn){
+                    //此处采用SharedPreferences保存每个线程的当前进度，和三个线程的总下载进度
+                    if (currPosition &lt; endPosition){
+                        sp.edit().putInt(SP_NAME + threadId,currPosition).apply();
+                        sp.edit().putInt(CURR_LENGTH,currLength).apply();
+                        Log.w(TAG, &quot;run: &quot; + &quot;取消下载&quot;+ currPosition);
+                    }
+                    return;
+                }
+                if (runningThreadCount == 0){
+                    sp.edit().clear().apply();
+                    handler.sendEmptyMessage(SUCCESS);
+                    handler.sendEmptyMessage(100);
+                    Log.w(TAG, &quot;run: &quot; + &quot;下载完成&quot;+&quot;currLength&quot;+ currLength + &quot;fileLength&quot; + fileLength);
+                    mThreads = null;
+                }
+
+            }else {
+                sp.edit().clear().apply();
+                handler.sendEmptyMessage(FAILURE);
+            }
+        } catch (Exception e) {
+            sp.edit().clear().apply();
+            handler.sendEmptyMessage(FAILURE);
+            e.printStackTrace();
+        }
+    }
+    public void cancel(){
+        isGoOn = false;
+    }
+}
+</code></pre></li>
+</ol>
+<h3 id="完整项目代码："><a href="#完整项目代码：" class="headerlink" title="完整项目代码："></a>完整项目代码：</h3><p><a href="https://github.com/threedeer/Download" target="_blank" rel="noopener">https://github.com/threedeer/Download</a></p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/threedeer" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2019 芒鞋胜马<br></p>
+             <!--    <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p> -->
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
